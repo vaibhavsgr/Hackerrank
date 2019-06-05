@@ -16,7 +16,6 @@ def maximumToys(prices, k):
     return toys
 
 
-
 if __name__ == '__main__':
     #fptr = open(os.environ['OUTPUT_PATH'], 'w')
     print "Enter the number of toys and the amount of money"

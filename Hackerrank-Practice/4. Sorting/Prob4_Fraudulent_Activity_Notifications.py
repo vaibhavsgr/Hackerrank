@@ -1,4 +1,3 @@
-
 import math
 import os
 import random
@@ -29,12 +28,12 @@ def activityNotifications(expenditure, d):
             notice += 1
         #print "Trailing data for {}th day = {}".format(items+1, trail)
         #print "Remaining expense = {}".format(expenditure)
-        print "Sorted trail looks like = {}".format(trail)
-        print "Median for {}th day = {}".format(items+1, median)
-        print notice
+        #print "Sorted trail looks like = {}".format(trail)
+        #print "Median for {}th day = {}".format(items+1, median)
+        #print notice
 
-        print "\n"
-
+        #print "\n"
+        return notice
 
 
 
