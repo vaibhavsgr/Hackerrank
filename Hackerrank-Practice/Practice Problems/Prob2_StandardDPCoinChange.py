@@ -58,10 +58,11 @@ def coinChange(coins, value):
         for i in range(coin+1,value+1): #fill the remaining sets with a new possibility with this coin
             ways[i] += ways[i-coin]
 
+    print (ways)
     return ways[value]
 
 if __name__ == "__main__":
-    coins = [1,5,6,8]
-    value = 11
+    coins = [2,5,3,6]
+    value = 10
     result = coinChange(coins, value)
     print (result)
