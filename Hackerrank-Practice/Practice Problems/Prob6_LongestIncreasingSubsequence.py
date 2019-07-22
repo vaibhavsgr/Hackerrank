@@ -1,15 +1,14 @@
 def longIncSubsequence(arr, n):
     "arr = 0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 15"
     "LIS = 0, 2, 6, 9, 11, 15"
+    "LIS length = 6"
     sub = [1] * n
     for i in range(1, n):
         for j in range(0, i):
             if arr[j]<arr[i]:
-                sub[i] = sub[j] + 1
-
+                sub[i] = max(sub[j] + 1, sub[i])
+            #print (sub)
     return sub
-
-
 
 
 if __name__ == "__main__":
@@ -21,3 +20,4 @@ if __name__ == "__main__":
         arr.append(int(input().strip()))
     res = longIncSubsequence(arr, n)
     print (res)
+    print (max(res))
