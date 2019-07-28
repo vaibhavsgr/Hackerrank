@@ -25,6 +25,8 @@ class Queue:
     def is_empty(self):
         return self.q==[]
 
+st = []
+
 def breadthFirstSearch(n, limit):
     Q = Queue()
     Q.enqueue(n)
@@ -33,6 +35,7 @@ def breadthFirstSearch(n, limit):
         n = Q.dequeue()
         if n <= limit:
             print (str(n) + " ")
+            st.append(n)
             last_digit = n % 10
 
             #if last_digit is 0, append last digit only
@@ -56,3 +59,4 @@ if __name__ == "__main__":
     #n = 40
     for n in range(10):
         breadthFirstSearch(n, limit)
+    print st
