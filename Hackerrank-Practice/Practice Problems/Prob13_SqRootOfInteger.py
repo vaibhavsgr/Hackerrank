@@ -11,12 +11,14 @@ a) Compute mid as (start + end)/2
 """
 import math
 
-def sqRoot(x):
+def sqRoot(x, precision):
     start = 1
-    end = x/2
+    end = x//2
+    #print (end)
 
+    #for integral part
     while (start<=end):
-        mid = (start+end)/2
+        mid = (start+end)//2
         if mid*mid == x:
             return mid
         elif mid*mid > x:
@@ -25,10 +27,22 @@ def sqRoot(x):
             start = mid+1
             ans = mid
 
+    #for fraction part
+    increment = 0.1
+    for i in range(0, precision):
+        if ans*ans <= x:
+            ans += increment
+        else:
+            ans -= increment
+            increment = increment/10
+
     return ans
 
 if __name__ == "__main__":
     print ("Enter n")
     n = int(input())
-    print ("Floor Sq root of n")
-    print (sqRoot(n))
+    print ("Enter precision")
+    p = int(input())
+    print ("Sq root of n")
+    r = sqRoot(n, p)
+    print (r)
