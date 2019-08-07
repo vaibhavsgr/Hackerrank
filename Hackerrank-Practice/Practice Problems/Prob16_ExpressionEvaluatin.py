@@ -30,7 +30,14 @@
    stack should have only one value in it, which is the final result."""
 
 
-   def computeExpression(a, b, op):
+def precedence(op):
+    if op == '+' or op == '-':
+        return 1
+    if op == '*' or op == '/':
+        return 2
+    return 0
+
+def computeExpression(a, b, op):
     if op == "+":
         return a+b
     elif op == "-":
@@ -40,27 +47,60 @@
     elif op == "/":
         return a/b
 
+
 def parseExpression(e):
-    value = []
-    operator = []
+    values = []
+    operators = []
 
     i = 0
 
     while i < len(e):
-        token = e[i]
 
-        if token.isdigit():
-            value.append(token)
-        elif token == "(":
-            operator.append(token)
+        if e[i] == " ":
+            i += 1
+            continue
 
-        elif token == ")":
-            op = operator.pop()
-            while op != "(":
-                a = value.pop()
-                b = value.pop()
+        elif e[i] == "(":
+            operators.append(e[i])
+
+        elif e[i].isdigit():
+            val = 0
+            values.append(e[i])
+            while (i < len(e) and e[i].isdigit()):
+                val = (val * 10) + int(e[i])
+                i += 1
+
+        elif e[i] == ")":
+            while len(operators) != 0 and operators[-1] != "(":
+                b = values.pop()
+                a = values.pop()
+                op = operators.pop()
                 result = computeExpression(a, b, op)
-                value.append(result)
-                op = operator.pop()
+                values.append(result)
 
-            operator.pop()
+            operators.pop()
+
+        elif len(operators)!=0 and precedence(e[-1]) >= precedence(e[i]):
+            b = values.pop()
+            a = values.pop()
+            op = operators.pop()
+            values.append(computeExpression(a, b, op))
+
+            operators.append(token)
+        i += 1
+
+    while len(operators) != 0:
+        b = values.pop()
+        a = values.pop()
+        op = operators.pop()
+        values.append(computeExpression(a, b, op))
+
+    print (values[-1])
+
+
+if __name__ == "__main__":
+
+    print(parseExpression("10 + 2 * 6"))
+    print(parseExpression("100 * 2 + 12"))
+    print(parseExpression("100 * ( 2 + 12 )"))
+    print(parseExpression("100 * ( 2 + 12 ) / 14"))
