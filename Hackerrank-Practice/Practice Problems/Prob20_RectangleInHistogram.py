@@ -39,7 +39,6 @@ def max_area_histogram(histogram):
     while stack:
         # pop the top
         top_of_stack = stack.pop()
-
         # Calculate the area with histogram[top_of_stack] stack as smallest bar
         area = (histogram[top_of_stack] *
               ((index - stack[-1] - 1)
